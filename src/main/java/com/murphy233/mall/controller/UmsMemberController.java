@@ -4,6 +4,7 @@ import com.murphy233.mall.common.api.CommonResult;
 import com.murphy233.mall.service.UmsMemberService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,15 +28,15 @@ public class UmsMemberController {
     @ApiOperation("获取验证码")
     @RequestMapping(value = "/getAuthCode", method = RequestMethod.GET)
     @ResponseBody
-    public CommonResult getAuthCode(@RequestParam String telephone) {
+    public CommonResult getAuthCode(@RequestParam @ApiParam("手机号") String telephone) {
         return memberService.generateAuthCode(telephone);
     }
 
     @ApiOperation("判断验证码是否正确")
     @RequestMapping(value = "/verifyAuthCode", method = RequestMethod.POST)
     @ResponseBody
-    public CommonResult updatePassword(@RequestParam String telephone,
-                                       @RequestParam String authCode) {
+    public CommonResult updatePassword(@RequestParam @ApiParam("手机号") String telephone,
+                                       @RequestParam @ApiParam("验证码") String authCode) {
         return memberService.verifyAuthCode(telephone,authCode);
     }
 }
