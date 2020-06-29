@@ -32,3 +32,7 @@ redis:
       authCode: "portal:authCode:"
     expire:
       authCode: 120 # 验证码超期时间
+
+logging:
+  level:
+    com.murphy233.mall.mbg.mapper.*: debug
