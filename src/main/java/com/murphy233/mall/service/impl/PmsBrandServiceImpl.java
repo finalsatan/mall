@@ -5,7 +5,6 @@ import com.murphy233.mall.mbg.mapper.PmsBrandMapper;
 import com.murphy233.mall.mbg.model.PmsBrand;
 import com.murphy233.mall.mbg.model.PmsBrandExample;
 import com.murphy233.mall.service.PmsBrandService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,8 +17,11 @@ import java.util.List;
  */
 @Service
 public class PmsBrandServiceImpl implements PmsBrandService {
-    @Autowired
-    private PmsBrandMapper brandMapper;
+    private final PmsBrandMapper brandMapper;
+
+    public PmsBrandServiceImpl(PmsBrandMapper brandMapper) {
+        this.brandMapper = brandMapper;
+    }
 
     @Override
     public List<PmsBrand> listAllBrand() {

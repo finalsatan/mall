@@ -26,8 +26,11 @@ import java.util.List;
 @Controller
 @RequestMapping("/brand")
 public class PmsBrandController {
-    @Autowired
-    private PmsBrandService demoService;
+    private final PmsBrandService demoService;
+
+    public PmsBrandController(PmsBrandService demoService) {
+        this.demoService = demoService;
+    }
 
     private static final Logger LOGGER = LoggerFactory.getLogger(PmsBrandController.class);
 
