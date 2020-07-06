@@ -10,6 +10,6 @@ import org.springframework.context.annotation.Configuration;
  * @date 2020/4/1 12:05 上午
  */
 @Configuration
-@MapperScan("com.murphy233.mall.mbg.mapper")
+@MapperScan({"com.murphy233.mall.mbg.mapper","com.murphy233.mall.dao"})
 public class MyBatisConfig {
 }

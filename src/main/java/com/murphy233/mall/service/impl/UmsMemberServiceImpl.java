@@ -3,7 +3,6 @@ package com.murphy233.mall.service.impl;
 import com.murphy233.mall.common.api.CommonResult;
 import com.murphy233.mall.service.RedisService;
 import com.murphy233.mall.service.UmsMemberService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
@@ -23,6 +22,8 @@ public class UmsMemberServiceImpl implements UmsMemberService {
     private String REDIS_KEY_PREFIX_AUTH_CODE;
     @Value("${redis.key.expire.authCode}")
     private Long AUTH_CODE_EXPIRE_SECONDS;
+    @Value("${mall.authCode.length}")
+    private Long AUTH_CODE_LENGTH;
 
     public UmsMemberServiceImpl(RedisService redisService) {
         this.redisService = redisService;
@@ -32,7 +33,7 @@ public class UmsMemberServiceImpl implements UmsMemberService {
     public CommonResult generateAuthCode(String telephone) {
         StringBuilder sb = new StringBuilder();
         Random random = new Random();
-        for (int i = 0; i < 6; i++) {
+        for (int i = 0; i < AUTH_CODE_LENGTH; i++) {
             sb.append(random.nextInt(10));
         }
         //验证码绑定手机号并存储到redis
@@ -41,8 +42,13 @@ public class UmsMemberServiceImpl implements UmsMemberService {
         return CommonResult.success(sb.toString(), "获取验证码成功");
     }
 
-
-    //对输入的验证码进行校验
+    /**
+     * 对输入的验证码进行校验
+     *
+     * @param telephone 手机号
+     * @param authCode  验证码
+     * @return 验证结果
+     */
     @Override
     public CommonResult verifyAuthCode(String telephone, String authCode) {
         if (StringUtils.isEmpty(authCode)) {

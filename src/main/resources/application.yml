@@ -36,3 +36,12 @@ redis:
 logging:
   level:
     com.murphy233.mall.mbg.mapper.*: debug
+
+mall:
+  authCode:
+    length: 6
+  jwt:
+    tokenHeader: Authorization #JWT存储的请求头
+    secret: Z92gaLEnyhNOE3q2 #JWT加解密使用的密钥
+    expiration: 604800 #JWT的超期限时间(60*60*24)
+    tokenHead: mall  #JWT负载中拿到开头

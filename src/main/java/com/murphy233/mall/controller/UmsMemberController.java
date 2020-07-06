@@ -18,8 +18,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * @author zhangyh2360@dimpt.com
  * @date 2020/4/1 10:38 下午
  */
-@Controller
 @Api(tags = {"会员登录注册管理"}, value = "UmsMemberController")
+@Controller
 @RequestMapping("/sso")
 public class UmsMemberController {
     private final UmsMemberService memberService;
@@ -40,6 +40,6 @@ public class UmsMemberController {
     @ResponseBody
     public CommonResult updatePassword(@RequestParam @ApiParam("手机号") String telephone,
                                        @RequestParam @ApiParam("验证码") String authCode) {
-        return memberService.verifyAuthCode(telephone,authCode);
+        return memberService.verifyAuthCode(telephone, authCode);
     }
 }
