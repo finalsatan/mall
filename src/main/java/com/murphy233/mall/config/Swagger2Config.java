@@ -6,10 +6,14 @@ import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.service.ApiInfo;
+import springfox.documentation.service.ApiKey;
 import springfox.documentation.service.Contact;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -33,8 +37,21 @@ public class Swagger2Config {
                 //为有@ApiOperation注解的方法生成API文档
 //                .apis(RequestHandlerSelectors.withMethodAnnotation(ApiOperation.class))
                 .paths(PathSelectors.any())
-                .build();
+                .build()
+                // 添加全局 JWT Token 验证
+                .securitySchemes(securitySchemes());
     }
+
+    /**
+     * 设置全局 JWT Token 验证参数
+     * @return api key list
+     */
+    private List<ApiKey> securitySchemes() {
+        List<ApiKey> apiKeyList= new ArrayList<ApiKey>();
+        apiKeyList.add(new ApiKey("token", "Authorization", "header"));
+        return apiKeyList;
+    }
+
 
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()

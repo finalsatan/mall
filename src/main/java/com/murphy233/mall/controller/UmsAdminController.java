@@ -30,7 +30,7 @@ public class UmsAdminController {
     private final UmsAdminService adminService;
     @Value("${mall.jwt.tokenHeader}")
     private String tokenHeader;
-    @Value("${mall.jwt.tokenHead")
+    @Value("${mall.jwt.tokenHead}")
     private String tokenHead;
 
     public UmsAdminController(UmsAdminService adminService) {
@@ -57,7 +57,7 @@ public class UmsAdminController {
         if (token == null) {
             return CommonResult.validateFailed("用户名或密码错误");
         }
-        Map<String, String> tokenMap = new HashMap<>();
+        Map<String, String> tokenMap = new HashMap<>(2);
         tokenMap.put("token", token);
         tokenMap.put("tokenHead", tokenHead);
         return CommonResult.success(tokenMap);
